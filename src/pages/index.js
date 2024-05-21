@@ -17,8 +17,8 @@ const list = document.querySelector('.places__list');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
-const popupImageElement = popupImage.querySelector('.popup__image'); // Перенесено
-const popupCaption = popupImage.querySelector('.popup__caption'); // Перенесено
+const popupImageElement = popupImage.querySelector('.popup__image'); 
+const popupCaption = popupImage.querySelector('.popup__caption'); 
 
 const nameInputEditProfile = formEditProfile.querySelector('.popup__input_type_name');
 const nameInputNewCard = formNewCard.querySelector('.popup__input_type_card-name');
