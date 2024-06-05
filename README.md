@@ -1,4 +1,4 @@
 # Проектная работа Mesto
 https://github.com/viktoryia-rohach/mesto-project-ff
-# cайт для просмотра
+# cайт
 https://viktoryia-rohach.github.io/mesto-project-ff/
