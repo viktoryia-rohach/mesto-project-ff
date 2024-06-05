@@ -1,5 +1,3 @@
-// api.js
-
 const CONFIG = {
     baseUrl: 'https://nomoreparties.co/v1/wff-cohort-14',
     headers: {
