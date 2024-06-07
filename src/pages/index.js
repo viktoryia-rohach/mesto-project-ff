@@ -3,6 +3,7 @@
 import '../pages/index.css';
 import '../images/logo.svg';
 import '../images/avatar.jpg';
+import '../images/edit-icon.svg';
 import { openModal, closeModal, handleModalClick } from '../components/modal.js';
 import { createCard, deleteCard } from '../components/card.js';
 import { enableValidation, clearValidation } from '../components/validation.js';
@@ -41,15 +42,13 @@ const linkInputNewCard = formNewCard.querySelector('.popup__input_type_url');
 const jobInput = formEditProfile.querySelector('.popup__input_type_description');
 
 let currentUserId = '';
-let tempNameValue = '';
-let tempJobValue = '';
 
 const profileImage = document.querySelector('.profile__image');
+const profileAvatarContainer = document.querySelector('.profile__avatar-container');
 
 // Находим элементы формы и кнопки
 const avatarForm = document.forms['avatar-form'];
 const avatarInput = avatarForm.querySelector('input[name="avatar"]');
-// const avatarError = avatarForm.querySelector('#avatar-input-error');
 const profileImageFormSubmitButton = avatarForm.querySelector('.popup__button');
 const avatarPopup = document.querySelector('.popup_type_avatar');
 
@@ -62,7 +61,7 @@ const renderLoading = ({ buttonElement, isLoading }) => {
   };
 
 
-profileImage.addEventListener('click', () => {
+profileAvatarContainer.addEventListener('click', () => {
     openModal(avatarPopup);
 });
 
@@ -125,8 +124,8 @@ Promise.all([getUserInfo(), getInitialCards()])
     });
 
 profileEditButton.addEventListener('click', () => {
-    tempNameValue = profileTitle.textContent;
-    tempJobValue = profileDescription.textContent;
+    const tempNameValue = profileTitle.textContent;
+    const tempJobValue = profileDescription.textContent;
 
     nameInputEditProfile.value = tempNameValue;
     jobInput.value = tempJobValue;
@@ -156,7 +155,7 @@ formEditProfile.addEventListener('submit', evt => {
         .then(userInfo => {
             profileTitle.textContent = userInfo.name;
             profileDescription.textContent = userInfo.about;
-            closeModal(popupEditProfile, validationConfig);
+            closeModal(popupEditProfile);
         })
         .catch(error => {
             console.error(error);
@@ -199,7 +198,7 @@ formNewCard.addEventListener('submit', evt => {
             );
             list.prepend(newCard);
             formNewCard.reset();
-            closeModal(popupNewCard, validationConfig);
+            closeModal(popupNewCard);
         })
         .catch(error => {
             console.error(error);
@@ -234,6 +233,6 @@ function openImagePopup(name, link) {
     openModal(popupImage);
 };
 
-
-
 enableValidation(validationConfig);
+
+

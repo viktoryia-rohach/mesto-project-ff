@@ -14,17 +14,10 @@ const hideInputError = (formElement, inputElement, config) => {
 
 const isValid = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) {
-        if (inputElement.validity.valueMissing) {
-            showInputError(formElement, inputElement, inputElement.validationMessage, config);
-        } else if (inputElement.validity.tooShort || inputElement.validity.tooLong) {
-            showInputError(formElement, inputElement, inputElement.validationMessage, config);
-        } else if (inputElement.validity.patternMismatch) {
-            showInputError(formElement, inputElement, inputElement.dataset.errorMessagePattern, config);
-        } else if (inputElement.validity.typeMismatch && inputElement.type === 'url') {
-            showInputError(formElement, inputElement, inputElement.validationMessage, config);
-        } else {
-            showInputError(formElement, inputElement, inputElement.validationMessage, config);
-        }
+        const errorMessage = inputElement.validity.patternMismatch
+            ? inputElement.dataset.errorMessagePattern
+            : inputElement.validationMessage;
+        showInputError(formElement, inputElement, errorMessage, config);
     } else {
         hideInputError(formElement, inputElement, config);
     }

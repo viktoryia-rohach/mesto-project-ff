@@ -6,13 +6,16 @@ const CONFIG = {
     },
 };
 
+function handleResponse(response) {
+    return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`);
+}
+
 export function getUserInfo() {
     return fetch(`${CONFIG.baseUrl}/users/me`, {
         headers: {
             authorization: CONFIG.headers.authorization
         }
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function getInitialCards() {
@@ -20,8 +23,7 @@ export function getInitialCards() {
         headers: {
             authorization: CONFIG.headers.authorization
         }
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function updateUserInfo(name, about) {
@@ -29,8 +31,7 @@ export function updateUserInfo(name, about) {
         method: 'PATCH',
         headers: CONFIG.headers,
         body: JSON.stringify({ name, about })
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function addCard(name, link) {
@@ -38,32 +39,28 @@ export function addCard(name, link) {
         method: 'POST',
         headers: CONFIG.headers,
         body: JSON.stringify({ name, link })
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function addLike(cardId) {
     return fetch(`${CONFIG.baseUrl}/cards/likes/${cardId}`, {
         method: 'PUT',
         headers: CONFIG.headers
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function removeLike(cardId) {
     return fetch(`${CONFIG.baseUrl}/cards/likes/${cardId}`, {
         method: 'DELETE',
         headers: CONFIG.headers
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function deleteCard(cardId) {
     return fetch(`${CONFIG.baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
         headers: CONFIG.headers
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
 
 export function updateAvatar(avatarUrl) {
@@ -71,6 +68,5 @@ export function updateAvatar(avatarUrl) {
         method: 'PATCH',
         headers: CONFIG.headers,
         body: JSON.stringify({ avatar: avatarUrl })
-    })
-    .then(response => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`));
+    }).then(handleResponse);
 }
